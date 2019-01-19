@@ -1,0 +1,75 @@
+//Snake.
+int x=200;  //Variables iniciales.
+int y=320;  //Variables iniciales.
+String direccion; //Saber la direcion actual de Snake.
+
+
+void setup(){
+  size(720,640);
+  background(0);
+  fill(255);
+  direccion = "right";    //Dirección inicial hacia la derecha -->
+  
+}
+
+void draw()
+{
+  background(0);
+  
+  
+  fill(255);
+ 
+  ellipse(x,y,20,20);     //Snake en posición inicial x,y
+  
+  if(direccion == "right")  //Avanza hacia la derecha por default.
+  {
+    x+=2;
+  }
+  else if(direccion == "left")
+  {
+    x-=2;
+  }
+    else if(direccion == "up")
+  {
+    y-=2;
+  }  
+  else if(direccion == "down")
+  {
+    y+=2;
+  }
+  
+  if(y==height||x==width||x==0||y==0)   //Si Snake choca con los bordes, pierde y vuelve a la posición inicial.
+  {
+    textSize(40);
+    fill(255);
+    text("Game over",250,320);  
+    
+    x=200;
+    y=320;
+  }
+  
+  
+}
+
+void keyPressed(){      //Cambia la variable bandera dependiendo de la dirección.
+  
+  if(key=='w'||keyCode==UP){
+    direccion = "up";
+  }
+  else if(key=='s'||keyCode==DOWN){
+    direccion = "down";
+  }
+  
+  else if(key=='d'||keyCode==RIGHT){
+    direccion = "right";
+  }
+  else if(key=='a'||keyCode==LEFT)
+  {
+    direccion = "left";
+  }
+  
+  
+} //Fin.
+  
+  
+  
