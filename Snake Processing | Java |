@@ -4,12 +4,12 @@ int[] y = new int[n];
 int v = 1;
 int cont = 0;
 String direccion;
-
+int band = 0;
 
 
 void setup()
 {
-  
+  cont = 0;
   size(720,640);
   background(0);
   for(int j=0;j<n;j++)
@@ -17,21 +17,33 @@ void setup()
     x[j] = 200 - cont;
     y[j] = 320;
     cont+=20;
-    direccion = "l";
+    direccion = "right";
   }
   
-  
-  for(int i=0;i<n;i++)
-  {
-    println("X:  ; Y: ",x[i],y[i]);
-  }
 }
 
 
 void draw(){
   
   background(0);
+  
+  
+  
+  rect(0,0,720,100);
 
+  fill(0);
+  text("V 1.0",5,10);
+  textSize(30);
+  text("S N A K E",280,50);
+  textSize(10);
+  text("by",340,70);
+  text("Oswalt Mosby",310,80);
+  
+  
+  
+  
+  fill(255);
+  delay(50);
   for(int j=n-1;j>=0;j--)
    {
     ellipse(x[j],y[j],20,20);
@@ -45,7 +57,8 @@ void draw(){
         y[i] = y[i-1];
         x[i] = x[i-1];
       }
-      x[0]+=2;
+      x[0]+=20;
+      
     }
     
   
@@ -56,7 +69,7 @@ void draw(){
         y[i] = y[i-1];
         x[i] = x[i-1];
       }
-      x[0]-=2;
+      x[0]-=20;
     }
     
   
@@ -68,7 +81,7 @@ void draw(){
         y[i] = y[i-1];
         x[i] = x[i-1];
       }
-      y[0]-=2;
+      y[0]-=20;
      }  
      
      
@@ -80,9 +93,17 @@ void draw(){
         y[i] = y[i-1];
         x[i] = x[i-1];
       }
-      y[0]+=2;
+      y[0]+=20;
     }
-   
+    
+    
+    if(y[0]==height||x[0]==width||x[0]==0||y[0]==100)
+    {
+      GameOver();
+      setup();
+      
+    }
+    
   
 }
 
@@ -104,6 +125,16 @@ void keyPressed(){
   }
    
 }
+
+void GameOver()
+{
+  println(band,".Game Over");
+  band++;
+  
+  
+}
+
+
   
   
   
