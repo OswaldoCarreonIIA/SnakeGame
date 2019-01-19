@@ -1,10 +1,11 @@
+//https://github.com/OswaldoCarreonIIA/SnakeGame
 int n = 10;
 int[] x = new int[n];   
 int[] y = new int[n];
 int v = 1;
 int cont = 0;
 String direccion;
-int band = 0;
+int band = 1;
 
 
 void setup()
@@ -28,7 +29,7 @@ void draw(){
   background(0);
   
   
-  
+  //  Banner principal.
   rect(0,0,720,100);
 
   fill(0);
@@ -38,26 +39,26 @@ void draw(){
   textSize(10);
   text("by",340,70);
   text("Oswalt Mosby",310,80);
-  
-  
-  
-  
+  //
   fill(255);
-  delay(50);
+  
+  
+  delay(50);                     // Es lo que se tardará en imrpimir cada cuadro, si queremos aumentar o disminuir la velocidad, modificaremos el numero.
   for(int j=n-1;j>=0;j--)
    {
-    ellipse(x[j],y[j],20,20);
+    ellipse(x[j],y[j],20,20);    // Imprimo la serpiente en las coordenadas en dónde está actualmente
    }
       
-    if(direccion == "right")
+    if(direccion == "right")    // Si la cadena vale right, aumentos los valores para que se muevan a la derecha.
     {
       for(int i=n-1;i>0;i--)
       {
         
-        y[i] = y[i-1];
+        y[i] = y[i-1];          // Hacer prueba de escritorio para ver el funcionamiento.
         x[i] = x[i-1];
       }
-      x[0]+=20;
+      x[0]+=20;        // El valor es 20, ya que es el diametro del circulo, sin embargo, esto aumentará la velocidad,
+                       // entonces agrego un delay de 50 milisegundos a la hora de imprimir la serpiente ( línea 47).
       
     }
     
@@ -97,17 +98,17 @@ void draw(){
     }
     
     
-    if(y[0]==height||x[0]==width||x[0]==0||y[0]==100)
-    {
-      GameOver();
-      setup();
+    if(y[0]==height||x[0]==width||x[0]==0||y[0]==100)      //Si la cabeza choca con los bordes, llamo a la funcion Game over (linea 130)
+    {                                                      //que me immprime en consola un Game Over
+      GameOver();                  
+      setup();                                             //Posteriormente, llamo a la función setup, que fue la unica manera en la que pensé para reiniciar el programa.
       
     }
     
   
 }
 
-void keyPressed(){
+void keyPressed(){                                          //Función del teclado
 
     if(key=='w'||keyCode==UP&&direccion!="down"){
     direccion = "up";
@@ -128,10 +129,9 @@ void keyPressed(){
 
 void GameOver()
 {
-  println(band,".Game Over");
+  println(band,".Game Over");    //Impirmo Game Over en consola
   band++;
-  
-  
+   
 }
 
 
