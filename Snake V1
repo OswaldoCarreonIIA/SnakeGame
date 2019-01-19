@@ -1,75 +1,106 @@
-//Snake.
-int x=200;  //Variables iniciales.
-int y=320;  //Variables iniciales.
-String direccion; //Saber la direcion actual de Snake.
+int[] x = new int[3];
+int[] y = new int[3];
+int v = 1;
+int cont = 0;
+String direccion;
 
 
-void setup(){
+
+void setup()
+{
+  
   size(720,640);
   background(0);
-  fill(255);
-  direccion = "right";    //Dirección inicial hacia la derecha -->
+  for(int j=0;j<3;j++)
+  {
+    x[j] = 200 - cont;
+    y[j] = 320;
+    cont+=20;
+  }
   
+  
+  for(int i=0;i<3;i++)
+  {
+    println("X:  ; Y: n",x[i],y[i]);
+  }
 }
 
-void draw()
-{
+
+void draw(){
+  
   background(0);
-  
-  
-  fill(255);
- 
-  ellipse(x,y,20,20);     //Snake en posición inicial x,y
-  
-  if(direccion == "right")  //Avanza hacia la derecha por default.
-  {
-    x+=2;
-  }
-  else if(direccion == "left")
-  {
-    x-=2;
-  }
-    else if(direccion == "up")
-  {
-    y-=2;
-  }  
-  else if(direccion == "down")
-  {
-    y+=2;
-  }
-  
-  if(y==height||x==width||x==0||y==0)   //Si Snake choca con los bordes, pierde y vuelve a la posición inicial.
-  {
-    textSize(40);
-    fill(255);
-    text("Game over",250,320);  
+
+  for(int j=0;j<3;j++)
+   {
+    ellipse(x[j],y[j],20,20);
+   }
+      
+    if(direccion == "right")
+    {
+      for(int i=2;i>=0;i--)
+      {
+        y[i] = y[i-1];
+        x[i] = x[i-1];
+      }
+      x[0]+=2;
+    }
     
-    x=200;
-    y=320;
-  }
   
+  else if(direccion == "left")
+    {
+      for(int i=2;i>=0;i--)
+      {
+        y[i] = y[i-1];
+        x[i] = x[i-1];
+      }
+      x[0]-=2;
+    }
+    
+  
+  else if(direccion == "up")
+     {
+      for(int i=2;i>=0;i--)
+      {
+        v=i-1;
+        y[i] = y[v];
+        x[i] = x[v];
+      }
+      y[0]-=2;
+     }  
+     
+     
+  else if(direccion == "down")
+    {
+      for(int i=2;i>=0;i--)
+      {
+        v=i-1;
+        y[i] = y[v];
+        x[i] = x[v];
+      }
+      y[0]+=2;
+    }
+   
   
 }
 
-void keyPressed(){      //Cambia la variable bandera dependiendo de la dirección.
-  
-  if(key=='w'||keyCode==UP){
+void keyPressed(){
+
+    if(key=='w'||keyCode==UP&&direccion!="down"){
     direccion = "up";
   }
-  else if(key=='s'||keyCode==DOWN){
+  else if(key=='s'||keyCode==DOWN&&direccion!="up"){
     direccion = "down";
   }
   
-  else if(key=='d'||keyCode==RIGHT){
+  else if(key=='d'||keyCode==RIGHT&&direccion!="left"){
     direccion = "right";
   }
-  else if(key=='a'||keyCode==LEFT)
+  else if(key=='a'||keyCode==LEFT&&direccion!="right")
   {
     direccion = "left";
   }
-  
-  
-} //Fin.
+   
+}
   
   
   
