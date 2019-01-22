@@ -1,26 +1,26 @@
-//https://github.com/OswaldoCarreonIIA/SnakeGame
+
 int n = 10;
 int[] x = new int[n];   
 int[] y = new int[n];
-int v = 1;
+
 int cont = 0;
 String direccion;
 int band = 1;
-
+int equis = (int) random(40,width);
+int ye = (int) random(150,height);
 
 void setup()
 {
   cont = 0;
-  size(720,640);
+  size(690,610);
   background(0);
   for(int j=0;j<n;j++)
   {
     x[j] = 200 - cont;
     y[j] = 320;
     cont+=20;
-    direccion = "right";
   }
-  
+   direccion = "right";
 }
 
 
@@ -31,6 +31,9 @@ void draw(){
   
   //  Banner principal.
   rect(0,0,720,100);
+  
+  fill(243, 211, 31);
+  //ellipse(equis,ye,20,20);
 
   fill(0);
   text("V 1.0",5,10);
@@ -49,62 +52,51 @@ void draw(){
     ellipse(x[j],y[j],20,20);    // Imprimo la serpiente en las coordenadas en dónde está actualmente
    }
       
-    if(direccion == "right")    // Si la cadena vale right, aumentos los valores para que se muevan a la derecha.
-    {
       for(int i=n-1;i>0;i--)
       {
         
         y[i] = y[i-1];          // Hacer prueba de escritorio para ver el funcionamiento.
         x[i] = x[i-1];
       }
-      x[0]+=20;        // El valor es 20, ya que es el diametro del circulo, sin embargo, esto aumentará la velocidad,
-                       // entonces agrego un delay de 50 milisegundos a la hora de imprimir la serpiente ( línea 47).
+                                 // El valor es 20, ya que es el diametro del circulo, sin embargo, esto aumentará la velocidad,
+                                 // entonces agrego un delay de 50 milisegundos a la hora de imprimir la serpiente ( línea 47).
       
-    }
     
+    if(direccion == "right")    // Si la cadena vale right, aumentos los valores para que se muevan a la derecha.
+    {
+     x[0]+=20; 
+    }
   
   else if(direccion == "left")
     {
-      for(int i=n-1;i>0;i--)
-      {
-        y[i] = y[i-1];
-        x[i] = x[i-1];
-      }
       x[0]-=20;
     }
     
   
   else if(direccion == "up")
-     {
-      for(int i=n-1;i>0;i--)
       {
-        
-        y[i] = y[i-1];
-        x[i] = x[i-1];
-      }
       y[0]-=20;
      }  
      
      
   else if(direccion == "down")
     {
-      for(int i=n-1;i>0;i--)
-      {
-      
-        y[i] = y[i-1];
-        x[i] = x[i-1];
-      }
       y[0]+=20;
     }
     
+    //Mejorar:
     
-    if(y[0]==height||x[0]==width||x[0]==0||y[0]==100)      //Si la cabeza choca con los bordes, llamo a la funcion Game over (linea 130)
+    if(y[0]==640||x[0]==720||x[0]==width-width||y[0]==100)      //Si la cabeza choca con los bordes, llamo a la funcion Game over (linea 130)
     {                                                      //que me immprime en consola un Game Over
       GameOver();                  
       setup();                                             //Posteriormente, llamo a la función setup, que fue la unica manera en la que pensé para reiniciar el programa.
       
-    }
-    
+    }    
+    /*if((equis > x[0]-10 && equis < x[0]+10) && (ye > y[0]-10 && ye < y[0]+10))
+    {
+      comida();
+      println("Comido");
+    }*/
   
 }
 
@@ -131,8 +123,18 @@ void GameOver()
 {
   println(band,".Game Over");    //Impirmo Game Over en consola
   band++;
+
+}
+
+void comida(){
+  
+   equis = (int) random(20,width);
+   ye = (int) random(120,height);
    
 }
+
+
+
 
 
   
